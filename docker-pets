@@ -1,0 +1,24 @@
+Building Pets from Scratch
+
+Pets is hosted on the Docker Hub at chrch/docker-pets:latest but you can also build it locally with the following steps
+
+$ git clone https://github.com/mark-church/docker-pets
+$ cd docker-pets/web
+$ docker build -t docker-pets .
+Running Pets as a Single Container, Stateless App
+
+$ docker run -it -p 5000:5000 docker-pets
+Running Pets on Docker for Mac/Windows in Development
+
+Docker Swarm can easily be set up to run applications on a single developer laptop. The full app can be brought up to run in the same way it would run in production. We use a compose v3 file to deploy a fully fault tolerant frontend and backend, along with the configurations, secrets, and networks required for the application to run. pets This is the full architecture that is deployed when using pets-dev-compose.yml.
+
+$ git clone https://github.com/mark-church/docker-pets
+
+~/docker-pets$ docker -v
+Docker version 1.13.1-rc1, build 2527cfc
+
+~/docker-pets$ docker node ls
+ID                           HOSTNAME  STATUS  AVAILABILITY  MANAGER STATUS
+fd3ovikiq7tzmdr70zukbsgbs *  moby      Ready   Active        Leader
+
+~/docker-pets$ docker stack deploy -c pets-dev-compose.yml pets
